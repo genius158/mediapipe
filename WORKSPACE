@@ -20,7 +20,6 @@ http_archive(
 load("@bazel_skylib//:workspace.bzl", "bazel_skylib_workspace")
 
 bazel_skylib_workspace()
-
 load("@bazel_skylib//lib:versions.bzl", "versions")
 
 versions.check(minimum_bazel_version = "3.7.2")
@@ -238,6 +237,7 @@ maven_install(
     ],
     fetch_sources = True,
     repositories = [
+        "https://maven.aliyun.com/repository/public",
         "https://maven.google.com",
         "https://dl.google.com/dl/android/maven2",
         "https://repo1.maven.org/maven2",
@@ -652,6 +652,10 @@ new_local_repository(
     build_file = "@//third_party:python_runtime.BUILD",
     path = ".",
 )
+local_repository(
+    name = "ubuntu2204_patches",
+    path = "third_party/ubuntu2204_compat",
+)
 
 http_archive(
     name = "android_opencv",
@@ -957,3 +961,6 @@ http_archive(
     strip_prefix = "curl-8.10.1",
     url = "https://curl.haxx.se/download/curl-8.10.1.tar.gz",
 )
+android_sdk_repository(name = "androidsdk", path = "/home/nio/Android/Sdk")
+android_ndk_repository(name = "androidndk", api_level = 21, path = "/home/nio/Android/Sdk/ndk-bundle/android-ndk-r28b")
+bind(name = "android/crosstool", actual = "@androidndk//:toolchain")

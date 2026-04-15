@@ -1,4 +1,12 @@
 ---
+1. ./setup_opencv.sh
+2. ./setup_android_sdk_and_ndk.sh
+3. ./build_android_examples.sh
+
+---
+
+
+---
 layout: forward
 target: https://developers.google.com/mediapipe
 title: Home
